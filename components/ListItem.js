@@ -1,24 +1,19 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 
-export const ListItem = () => {
+export const ListItem = (props) => {
+  const { title, subTitle, imageUrl } = props;
+
   return (
     <View style={styles.itemContainer}>
       <View style={styles.leftContainer}>
-        <Image
-          style={{ width: 100, height: 100 }}
-          source={{ uri: 'https://picsum.photos/200' }}
-        />
+        <Image style={{ width: 100, height: 100 }} source={{ uri: imageUrl }} />
       </View>
-
       <View style={styles.rightContainer}>
         <Text style={styles.title} numberOfLines={3}>
-          React Native は、Facebook
-          が開発したクロスプラットフォームアプリ開発用フレームワークです。 React
-          Native でアプリを作ることで、クロスプラットフォーム( iOS / Android
-          どちらでも動く)アプリを作ることができます。
+          {title}
         </Text>
-        <Text style={styles.subTitle}>Techニュース</Text>
+        <Text style={styles.subTitle}>{subTitle}</Text>
       </View>
     </View>
   );
