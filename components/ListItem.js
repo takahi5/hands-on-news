@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 export const ListItem = (props) => {
-  const { title, subTitle, imageUrl } = props;
+  const { title, subTitle, imageUrl, onPress } = props;
 
   return (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <View style={styles.leftContainer}>
         <Image style={{ width: 100, height: 100 }} source={{ uri: imageUrl }} />
       </View>
@@ -15,7 +15,7 @@ export const ListItem = (props) => {
         </Text>
         <Text style={styles.subTitle}>{subTitle}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
