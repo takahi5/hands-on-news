@@ -1,38 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
-import axios from 'axios';
-import { ListItem } from './components/ListItem';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [articles, setArticles] = useState([]);
-
-  const fetch = async () => {
-    const response = await axios.get(
-      'https://asia-northeast1-news-app-udemy.cloudfunctions.net/dummy_news'
-    );
-    setArticles(response.data.articles);
-  };
-
-  useEffect(() => {
-    fetch();
-  }, []);
-
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={articles}
-        renderItem={({ item }) => (
-          <ListItem
-            imageUrl={item.urlToImage}
-            title={item.title}
-            subTitle={item.author}
-          />
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      />
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
