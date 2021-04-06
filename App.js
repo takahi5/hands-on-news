@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { ListItem } from './components/ListItem';
 
@@ -25,10 +25,16 @@ const ARTICLES = [
 ];
 
 export default function App() {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    setArticles(ARTICLES);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={ARTICLES}
+        data={articles}
         renderItem={({ item }) => (
           <ListItem
             imageUrl={item.urlToImage}
