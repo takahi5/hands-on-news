@@ -1,34 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import axios from 'axios';
 import { ListItem } from './components/ListItem';
-
-const ARTICLES = [
-  {
-    urlToImage: 'https://picsum.photos/200',
-    title:
-      'React Native は、Facebookが開発したクロスプラットフォームアプリ開発用フレームワークです。 ReactNative でアプリを作ることで、クロスプラットフォーム( iOS / Androidどちらでも動く)アプリを作ることができます。',
-    author: 'Techニュース',
-  },
-  {
-    urlToImage: 'https://picsum.photos/201',
-    title:
-      'React Native Japan コミュニティは、日本でのReact Nativeの普及のため、活動を行っているコミュニティです。',
-    author: 'React Native Japan',
-  },
-  {
-    urlToImage: 'https://picsum.photos/203',
-    title:
-      'JavaScriptはプロトタイプベースのオブジェクト指向スクリプト言語であるが、クラスなどのクラスベースに見られる機能も取り込んでいます。',
-    author: 'JavaScriptFan',
-  },
-];
 
 export default function App() {
   const [articles, setArticles] = useState([]);
 
+  const fetch = async () => {
+    const response = await axios.get(
+      'https://asia-northeast1-news-app-udemy.cloudfunctions.net/dummy_news'
+    );
+    setArticles(response.data.articles);
+  };
+
   useEffect(() => {
-    setArticles(ARTICLES);
+    fetch();
   }, []);
 
   return (
